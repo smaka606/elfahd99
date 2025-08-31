@@ -1,0 +1,42 @@
+This directory contains placeholder references for images.
+
+In a production environment, you would replace these with actual high-quality images:
+
+Required Images:
+- logo.png (Company logo)
+- favicon.ico (Website favicon)
+- apple-touch-icon.png (Apple touch icon)
+
+Hero Section:
+- hero-seafood.jpg (Main hero image of fresh seafood)
+
+Products:
+- fish/tilapia.jpg (Fresh tilapia fish)
+- fish/sea-bream.jpg (Sea bream fish)
+- fish/sea-bass.jpg (Sea bass fish)
+- fish/mullet.jpg (Mullet fish)
+- shrimp/jumbo-shrimp.jpg (Jumbo shrimp)
+- shrimp/medium-shrimp.jpg (Medium shrimp)
+- crab/fresh-crab.jpg (Fresh crab)
+- squid/calamari.jpg (Fresh calamari)
+- other/mussels.jpg (Fresh mussels)
+- other/octopus.jpg (Fresh octopus)
+
+About Page:
+- about/our-story.jpg (Company story image)
+- team/founder.jpg (Founder photo)
+- team/quality-manager.jpg (Quality manager photo)
+- team/customer-service.jpg (Customer service manager photo)
+
+All images should be:
+- High quality (at least 1200px width for hero images)
+- Optimized for web (compressed but maintaining quality)
+- In WebP format when possible for better performance
+- Have appropriate alt text for accessibility
+
+For development/demo purposes, you can use placeholder images from services like:
+- Unsplash.com
+- Pexels.com
+- Pixabay.com
+
+Make sure to use images that are royalty-free or properly licensed for commercial use.

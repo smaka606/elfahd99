@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منتجاتنا - الفهد للمأكولات البحرية</title>
+    <meta name="description" content="تصفح مجموعتنا الواسعة من أجود أنواع الأسماك والمأكولات البحرية الطازجة - أسماك، جمبري، كابوريا، كاليماري وأكثر">
+    <meta name="keywords" content="منتجات بحرية، أسماك طازجة، جمبري، كابوريا، كاليماري، الفهد">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="منتجاتنا - الفهد للمأكولات البحرية">
+    <meta property="og:description" content="تصفح مجموعتنا الواسعة من أجود أنواع المأكولات البحرية الطازجة">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/about/logo.png" alt="الفهد للمأكولات البحرية" class="logo-img">
+                <span class="logo-text">الفهد</span>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">الرئيسية</a>
+                <a href="products.html" class="nav-link active">منتجاتنا</a>
+                <a href="about.html" class="nav-link">من نحن</a>
+                <a href="contact.html" class="nav-link">اتصل بنا</a>
+                <a href="https://wa.me/201143343338" class="nav-link whatsapp-nav" target="_blank">
+                    <i class="whatsapp-icon">📱</i> واتساب
+                </a>
+            </div>
+            
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="page-title">منتجاتنا</h1>
+                <p class="page-subtitle">أجود أنواع المأكولات البحرية الطازجة من أعماق البحار</p>
+                <nav class="breadcrumb">
+                    <a href="index.html">الرئيسية</a>
+                    <span>›</span>
+                    <span>منتجاتنا</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Filter -->
+    <section class="products-filter">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-category="all">كل المنتجات</button>
+                <button class="filter-btn" data-category="fish">أسماك طازجة</button>
+                <button class="filter-btn" data-category="shrimp">جمبري</button>
+                <button class="filter-btn" data-category="crab">كابوريا</button>
+                <button class="filter-btn" data-category="squid">كاليماري</button>
+                <button class="filter-btn" data-category="other">منتجات أخرى</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-grid" id="products-grid">
+                <!-- Fish Products -->
+                <div class="product-card" data-category="fish">
+                    <div class="product-image">
+                        <img src="images/about/product1.jpg" alt="سمك بلطي طازج" loading="lazy">
+                        <div class="product-badge new">جديد</div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="product-action" onclick="quickView('سمك بلطي طازج', '80-100', 'أفضل أنواع السمك البلطي الطازج من النيل')">
+                                    👁️ معاينة سريعة
+                                </button>
+                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن السمك البلطي" 
+                                   class="product-action whatsapp" target="_blank">
+                                    📱 اطلب الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">سمك بلطي طازج</h3>
+                        <p class="product-description">أفضل أنواع السمك البلطي الطازج من النيل</p>
+                        <div class="product-price">
+                            <span class="price-range">80 - 100 جنيه/كيلو</span>
+                            <span class="price-note">حسب الحجم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fish">
+                    <div class="product-image">
+                        <img src="images/about/product1.jpg" alt="سمك دنيس" loading="lazy">
+                        <div class="product-badge popular">الأكثر طلباً</div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="product-action" onclick="quickView('سمك دنيس', '120-150', 'سمك دنيس طازج من البحر المتوسط')">
+                                    👁️ معاينة سريعة
+                                </button>
+                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن سمك الدنيس" 
+                                   class="product-action whatsapp" target="_blank">
+                                    📱 اطلب الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">سمك دنيس</h3>
+                        <p class="product-description">سمك دنيس طازج من البحر المتوسط</p>
+                        <div class="product-price">
+                            <span class="price-range">120 - 150 جنيه/كيلو</span>
+                            <span class="price-note">حسب الحجم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fish">
+                    <div class="product-image">
+                        <img src="images/about/product1.jpg" alt="سمك قاروص" loading="lazy">
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="product-action" onclick="quickView('سمك قاروص', '180-220', 'سمك قاروص فاخر من البحر المتوسط')">
+                                    👁️ معاينة سريعة
+                                </button>
+                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن سمك القاروص" 
+                                   class="product-action whatsapp" target="_blank">
+                                    📱 اطلب الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">سمك قاروص</h3>
+                        <p class="product-description">سمك قاروص فاخر من البحر المتوسط</p>
+                        <div class="product-price">
+                            <span class="price-range">180 - 220 جنيه/كيلو</span>
+                            <span class="price-note">حسب الحجم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="fish">
+                    <div class="product-image">
+                        <img src="images/about/product1.jpg" alt="سمك بوري" loading="lazy">
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="product-action" onclick="quickView('سمك بوري', '90-120', 'سمك بوري طازج ممتاز للشوي والقلي')">
+                                    👁️ معاينة سريعة
+                                </button>
+                                <a href="https://wa.me/201234567890?text=أهلاً، أريد أستفسر عن السمك البوري" 
+                                   class="product-action whatsapp" target="_blank">
+                                    📱 اطلب الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">سمك بوري</h3>
+                        <p class="product-description">سمك بوري طازج ممتاز للشوي والقلي</p>
+                        <div class="product-price">
+                            <span class="price-range">90 - 120 جنيه/كيلو</span>
+                            <span class="price-note">حسب الحجم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shrimp Products -->
+                <div class="product-card" data-category="shrimp">
+                    <div class="product-image">
+                        <img src="images/about/product1.jpg" alt="جمبري جامبو" loading="lazy">
+                        <div class="product-badge premium">بريميوم</div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="product-action" onclick="quickView('جمبري جامبو', '250-300', 'جمبري جامبو فاخر طازج من البحر الأحمر')">
+                                    👁️ معاينة سريعة
+                                </button>
+                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن الجمبري الجامبو" 
+                                   class="product-action whatsapp" target="_blank">
+                                    📱 اطلب الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">جمبري جامبو</h3>
+                        <p class="product-description">جمبري جامبو فاخر طازج من البحر الأحمر</p>
+                        <div class="product-price">
+                            <span class="price-range">250 - 300 جنيه/كيلو</span>
+                            <span class="price-note">حسب الحجم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="shrimp">
+                    <div class="product-image">
+                        <img src="images/about/product1.jpg" alt="جمبري وسط" loading="lazy">
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="product-action" onclick="quickView('جمبري وسط', '180-220', 'جمبري متوسط الحجم مثالي للطبخ')">
+                                    👁️ معاينة سريعة
+                                </button>
+                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن الجمبري الوسط" 
+                                   class="product-action whatsapp" target="_blank">
+                                    📱 اطلب الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">جمبري وسط</h3>
+                        <p class="product-description">جمبري متوسط الحجم مثالي للطبخ</p>
+                        <div class="product-price">
+                            <span class="price-range">180 - 220 جنيه/كيلو</span>
+                            <span class="price-note">حسب الحجم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Crab Products -->
+                <div class="product-card" data-category="crab">
+                    <div class="product-image">
+                        <img src="images/about/product1.jpg" alt="كابوريا طازجة" loading="lazy">
+                        <div class="product-badge seasonal">موسمي</div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="product-action" onclick="quickView('كابوريا طازجة', '200-250', 'كابوريا طازجة من البحر المتوسط')">
+                                    👁️ معاينة سريعة
+                                </button>
+                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن الكابوريا" 
+                                   class="product-action whatsapp" target="_blank">
+                                    📱 اطلب الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">كابوريا طازجة</h3>
+                        <p class="product-description">كابوريا طازجة من البحر المتوسط</p>
+                        <div class="product-price">
+                            <span class="price-range">200 - 250 جنيه/كيلو</span>
+                            <span class="price-note">حسب الحجم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Squid Products -->
+                <div class="product-card" data-category="squid">
+                    <div class="product-image">
+                        <img src="images/about/product1.jpg" alt="كاليماري طازج" loading="lazy">
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="product-action" onclick="quickView('كاليماري طازج', '150-180', 'كاليماري طازج مثالي للقلي والشوي')">
+                                    👁️ معاينة سريعة
+                                </button>
+                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن الكاليماري" 
+                                   class="product-action whatsapp" target="_blank">
+                                    📱 اطلب الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">كاليماري طازج</h3>
+                        <p class="product-description">كاليماري طازج مثالي للقلي والشوي</p>
+                        <div class="product-price">
+                            <span class="price-range">150 - 180 جنيه/كيلو</span>
+                            <span class="price-note">حسب الحجم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Products -->
+                <div class="product-card" data-category="other">
+                    <div class="product-image">
+                        <img src="images/about/product1.jpg" alt="بلح البحر" loading="lazy">
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="product-action" onclick="quickView('بلح البحر', '120-150', 'بلح البحر الطازج من الإسكندرية')">
+                                    👁️ معاينة سريعة
+                                </button>
+                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن بلح البحر" 
+                                   class="product-action whatsapp" target="_blank">
+                                    📱 اطلب الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">بلح البحر</h3>
+                        <p class="product-description">بلح البحر الطازج من الإسكندرية</p>
+                        <div class="product-price">
+                            <span class="price-range">120 - 150 جنيه/كيلو</span>
+                            <span class="price-note">حسب الحجم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="other">
+                    <div class="product-image">
+                        <img src="images/about/product1.jpg" alt="أخطبوط" loading="lazy">
+                        <div class="product-badge exclusive">حصري</div>
+                        <div class="product-overlay">
+                            <div class="product-actions">
+                                <button class="product-action" onclick="quickView('أخطبوط طازج', '280-320', 'أخطبوط طازج نادر من أعماق البحر')">
+                                    👁️ معاينة سريعة
+                                </button>
+                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن الأخطبوط" 
+                                   class="product-action whatsapp" target="_blank">
+                                    📱 اطلب الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">أخطبوط طازج</h3>
+                        <p class="product-description">أخطبوط طازج نادر من أعماق البحر</p>
+                        <div class="product-price">
+                            <span class="price-range">280 - 320 جنيه/كيلو</span>
+                            <span class="price-note">حسب الحجم</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick View Modal -->
+    <div id="quickViewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">تفاصيل المنتج</h3>
+                <button class="modal-close" onclick="closeQuickView()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <p id="modalDescription"></p>
+                    <div class="modal-price">
+                        <span id="modalPrice"></span>
+                    </div>
+                    <div class="modal-features">
+                        <h4>مميزات المنتج:</h4>
+                        <ul>
+                            <li>طازج 100%</li>
+                            <li>جودة عالية</li>
+                            <li>توصيل سريع</li>
+                            <li>أسعار تنافسية</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="modalWhatsappBtn" href="#" class="btn btn-whatsapp" target="_blank">
+                    <span>📱 اطلب الآن</span>
+                </a>
+                <button onclick="closeQuickView()" class="btn btn-outline">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">مالقيتش اللي تدور عليه؟</h2>
+                <p class="cta-text">اتصل بنا وهنساعدك تلاقي بالظبط اللي محتاجه من أجود المأكولات البحرية</p>
+                <div class="cta-buttons">
+                    <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن منتج معين" 
+                       class="btn btn-whatsapp-large" target="_blank">
+                        <span>📱 استفسر الآن</span>
+                        <div class="btn-ripple"></div>
+                    </a>
+                    <a href="contact.html" class="btn btn-outline">
+                        <span>تواصل معانا</span>
+                        <div class="btn-ripple"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/about/logo.png" alt="الفهد للمأكولات البحرية">
+                        <h3>الفهد للمأكولات البحرية</h3>
+                    </div>
+                    <p class="footer-description">
+                        موردك الموثوق لأجود أنواع الأسماك والمأكولات البحرية الطازجة في مصر
+                    </p>
+                    <div class="social-links">
+                        <a href="https://wa.me/201143343338" target="_blank" class="social-link whatsapp">📱</a>
+                        <a href="tel:+201143343338" class="social-link phone">📞</a>
+                        <a href="mailto:info@alfahd-seafood.com" class="social-link email">✉️</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">روابط سريعة</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="products.html">منتجاتنا</a></li>
+                        <li><a href="about.html">من نحن</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">منتجاتنا</h4>
+                    <ul class="footer-links">
+                        <li><a href="#fish">أسماك طازجة</a></li>
+                        <li><a href="#shrimp">جمبري</a></li>
+                        <li><a href="#crab">كابوريا</a></li>
+                        <li><a href="#squid">كاليماري</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">معلومات التواصل</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span>الكورنيش، الإسكندرية، مصر</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📞</span>
+                            <a href="tel:+201143343338">201143343338+</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">✉️</span>
+                            <a href="mailto:info@alfahd-seafood.com">info@alfahd-seafood.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">⏰</span>
+                            <span>يومياً من 8 صباحاً - 10 مساءً</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 الفهد للمأكولات البحرية. جميع الحقوق محفوظة.</p>
+                <p>صُمم بـ ❤️ للمأكولات البحرية الطازجة</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/201143343338?text=أهلاً، أريد الاستفسار عن منتجاتكم" 
+       class="whatsapp-float" target="_blank" aria-label="تواصل معنا عبر الواتساب">
+        <div class="whatsapp-icon-float">📱</div>
+        <div class="whatsapp-pulse"></div>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="العودة للأعلى">
+        <span>⬆️</span>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
