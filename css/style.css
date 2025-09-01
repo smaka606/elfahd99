@@ -1511,6 +1511,75 @@ p {
     color: var(--gray-500);
 }
 
+.filter-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .filter-controls {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+#search-input {
+    width: 100%;
+    padding: var(--spacing-3) var(--spacing-4);
+    padding-left: var(--spacing-8);
+    border-radius: var(--border-radius-full);
+    border: 2px solid var(--gray-300);
+    font-size: var(--font-size-base);
+    transition: all var(--transition-base);
+}
+
+#search-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(13, 115, 119, 0.1);
+    outline: none;
+}
+
+.search-container::before {
+    content: '🔍';
+    position: absolute;
+    left: var(--spacing-4);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray-400);
+}
+
+.product-card .product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.product-order-btn {
+    margin-top: var(--spacing-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+}
+
+.no-products-found {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: var(--font-size-lg);
+    color: var(--gray-600);
+    padding: var(--spacing-12);
+}
+
+
 /* ==========================================================================
    TESTIMONIALS SECTION
    ========================================================================== */

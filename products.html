@@ -67,13 +67,18 @@
     <!-- Products Filter -->
     <section class="products-filter">
         <div class="container">
-            <div class="filter-tabs">
-                <button class="filter-btn active" data-category="all">كل المنتجات</button>
-                <button class="filter-btn" data-category="fish">أسماك طازجة</button>
-                <button class="filter-btn" data-category="shrimp">جمبري</button>
-                <button class="filter-btn" data-category="crab">كابوريا</button>
-                <button class="filter-btn" data-category="squid">كاليماري</button>
-                <button class="filter-btn" data-category="other">منتجات أخرى</button>
+            <div class="filter-controls">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="ابحث عن منتج...">
+                </div>
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-category="all">كل المنتجات</button>
+                    <button class="filter-btn" data-category="fish">أسماك</button>
+                    <button class="filter-btn" data-category="shrimp">جمبري</button>
+                    <button class="filter-btn" data-category="crab">كابوريا</button>
+                    <button class="filter-btn" data-category="squid">كاليماري و سبيط</button>
+                    <button class="filter-btn" data-category="other">أخرى</button>
+                </div>
             </div>
         </div>
     </section>
@@ -82,265 +87,7 @@
     <section class="products-section">
         <div class="container">
             <div class="products-grid" id="products-grid">
-                <!-- Fish Products -->
-                <div class="product-card" data-category="fish">
-                    <div class="product-image">
-                        <img src="images/about/product1.jpg" alt="سمك بلطي طازج" loading="lazy">
-                        <div class="product-badge new">جديد</div>
-                        <div class="product-overlay">
-                            <div class="product-actions">
-                                <button class="product-action" onclick="quickView('سمك بلطي طازج', '80-100', 'أفضل أنواع السمك البلطي الطازج من النيل')">
-                                    👁️ معاينة سريعة
-                                </button>
-                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن السمك البلطي" 
-                                   class="product-action whatsapp" target="_blank">
-                                    📱 اطلب الآن
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">سمك بلطي طازج</h3>
-                        <p class="product-description">أفضل أنواع السمك البلطي الطازج من النيل</p>
-                        <div class="product-price">
-                            <span class="price-range">80 - 100 جنيه/كيلو</span>
-                            <span class="price-note">حسب الحجم</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="fish">
-                    <div class="product-image">
-                        <img src="images/about/product1.jpg" alt="سمك دنيس" loading="lazy">
-                        <div class="product-badge popular">الأكثر طلباً</div>
-                        <div class="product-overlay">
-                            <div class="product-actions">
-                                <button class="product-action" onclick="quickView('سمك دنيس', '120-150', 'سمك دنيس طازج من البحر المتوسط')">
-                                    👁️ معاينة سريعة
-                                </button>
-                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن سمك الدنيس" 
-                                   class="product-action whatsapp" target="_blank">
-                                    📱 اطلب الآن
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">سمك دنيس</h3>
-                        <p class="product-description">سمك دنيس طازج من البحر المتوسط</p>
-                        <div class="product-price">
-                            <span class="price-range">120 - 150 جنيه/كيلو</span>
-                            <span class="price-note">حسب الحجم</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="fish">
-                    <div class="product-image">
-                        <img src="images/about/product1.jpg" alt="سمك قاروص" loading="lazy">
-                        <div class="product-overlay">
-                            <div class="product-actions">
-                                <button class="product-action" onclick="quickView('سمك قاروص', '180-220', 'سمك قاروص فاخر من البحر المتوسط')">
-                                    👁️ معاينة سريعة
-                                </button>
-                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن سمك القاروص" 
-                                   class="product-action whatsapp" target="_blank">
-                                    📱 اطلب الآن
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">سمك قاروص</h3>
-                        <p class="product-description">سمك قاروص فاخر من البحر المتوسط</p>
-                        <div class="product-price">
-                            <span class="price-range">180 - 220 جنيه/كيلو</span>
-                            <span class="price-note">حسب الحجم</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="fish">
-                    <div class="product-image">
-                        <img src="images/about/product1.jpg" alt="سمك بوري" loading="lazy">
-                        <div class="product-overlay">
-                            <div class="product-actions">
-                                <button class="product-action" onclick="quickView('سمك بوري', '90-120', 'سمك بوري طازج ممتاز للشوي والقلي')">
-                                    👁️ معاينة سريعة
-                                </button>
-                                <a href="https://wa.me/201234567890?text=أهلاً، أريد أستفسر عن السمك البوري" 
-                                   class="product-action whatsapp" target="_blank">
-                                    📱 اطلب الآن
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">سمك بوري</h3>
-                        <p class="product-description">سمك بوري طازج ممتاز للشوي والقلي</p>
-                        <div class="product-price">
-                            <span class="price-range">90 - 120 جنيه/كيلو</span>
-                            <span class="price-note">حسب الحجم</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Shrimp Products -->
-                <div class="product-card" data-category="shrimp">
-                    <div class="product-image">
-                        <img src="images/about/product1.jpg" alt="جمبري جامبو" loading="lazy">
-                        <div class="product-badge premium">بريميوم</div>
-                        <div class="product-overlay">
-                            <div class="product-actions">
-                                <button class="product-action" onclick="quickView('جمبري جامبو', '250-300', 'جمبري جامبو فاخر طازج من البحر الأحمر')">
-                                    👁️ معاينة سريعة
-                                </button>
-                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن الجمبري الجامبو" 
-                                   class="product-action whatsapp" target="_blank">
-                                    📱 اطلب الآن
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">جمبري جامبو</h3>
-                        <p class="product-description">جمبري جامبو فاخر طازج من البحر الأحمر</p>
-                        <div class="product-price">
-                            <span class="price-range">250 - 300 جنيه/كيلو</span>
-                            <span class="price-note">حسب الحجم</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="shrimp">
-                    <div class="product-image">
-                        <img src="images/about/product1.jpg" alt="جمبري وسط" loading="lazy">
-                        <div class="product-overlay">
-                            <div class="product-actions">
-                                <button class="product-action" onclick="quickView('جمبري وسط', '180-220', 'جمبري متوسط الحجم مثالي للطبخ')">
-                                    👁️ معاينة سريعة
-                                </button>
-                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن الجمبري الوسط" 
-                                   class="product-action whatsapp" target="_blank">
-                                    📱 اطلب الآن
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">جمبري وسط</h3>
-                        <p class="product-description">جمبري متوسط الحجم مثالي للطبخ</p>
-                        <div class="product-price">
-                            <span class="price-range">180 - 220 جنيه/كيلو</span>
-                            <span class="price-note">حسب الحجم</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Crab Products -->
-                <div class="product-card" data-category="crab">
-                    <div class="product-image">
-                        <img src="images/about/product1.jpg" alt="كابوريا طازجة" loading="lazy">
-                        <div class="product-badge seasonal">موسمي</div>
-                        <div class="product-overlay">
-                            <div class="product-actions">
-                                <button class="product-action" onclick="quickView('كابوريا طازجة', '200-250', 'كابوريا طازجة من البحر المتوسط')">
-                                    👁️ معاينة سريعة
-                                </button>
-                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن الكابوريا" 
-                                   class="product-action whatsapp" target="_blank">
-                                    📱 اطلب الآن
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">كابوريا طازجة</h3>
-                        <p class="product-description">كابوريا طازجة من البحر المتوسط</p>
-                        <div class="product-price">
-                            <span class="price-range">200 - 250 جنيه/كيلو</span>
-                            <span class="price-note">حسب الحجم</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Squid Products -->
-                <div class="product-card" data-category="squid">
-                    <div class="product-image">
-                        <img src="images/about/product1.jpg" alt="كاليماري طازج" loading="lazy">
-                        <div class="product-overlay">
-                            <div class="product-actions">
-                                <button class="product-action" onclick="quickView('كاليماري طازج', '150-180', 'كاليماري طازج مثالي للقلي والشوي')">
-                                    👁️ معاينة سريعة
-                                </button>
-                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن الكاليماري" 
-                                   class="product-action whatsapp" target="_blank">
-                                    📱 اطلب الآن
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">كاليماري طازج</h3>
-                        <p class="product-description">كاليماري طازج مثالي للقلي والشوي</p>
-                        <div class="product-price">
-                            <span class="price-range">150 - 180 جنيه/كيلو</span>
-                            <span class="price-note">حسب الحجم</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Other Products -->
-                <div class="product-card" data-category="other">
-                    <div class="product-image">
-                        <img src="images/about/product1.jpg" alt="بلح البحر" loading="lazy">
-                        <div class="product-overlay">
-                            <div class="product-actions">
-                                <button class="product-action" onclick="quickView('بلح البحر', '120-150', 'بلح البحر الطازج من الإسكندرية')">
-                                    👁️ معاينة سريعة
-                                </button>
-                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن بلح البحر" 
-                                   class="product-action whatsapp" target="_blank">
-                                    📱 اطلب الآن
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">بلح البحر</h3>
-                        <p class="product-description">بلح البحر الطازج من الإسكندرية</p>
-                        <div class="product-price">
-                            <span class="price-range">120 - 150 جنيه/كيلو</span>
-                            <span class="price-note">حسب الحجم</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="other">
-                    <div class="product-image">
-                        <img src="images/about/product1.jpg" alt="أخطبوط" loading="lazy">
-                        <div class="product-badge exclusive">حصري</div>
-                        <div class="product-overlay">
-                            <div class="product-actions">
-                                <button class="product-action" onclick="quickView('أخطبوط طازج', '280-320', 'أخطبوط طازج نادر من أعماق البحر')">
-                                    👁️ معاينة سريعة
-                                </button>
-                                <a href="https://wa.me/201143343338?text=أهلاً، أريد أستفسر عن الأخطبوط" 
-                                   class="product-action whatsapp" target="_blank">
-                                    📱 اطلب الآن
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">أخطبوط طازج</h3>
-                        <p class="product-description">أخطبوط طازج نادر من أعماق البحر</p>
-                        <div class="product-price">
-                            <span class="price-range">280 - 320 جنيه/كيلو</span>
-                            <span class="price-note">حسب الحجم</span>
-                        </div>
-                    </div>
-                </div>
+                <!-- Product cards will be dynamically inserted here by JavaScript -->
             </div>
         </div>
     </section>
@@ -481,6 +228,7 @@
     </button>
 
     <!-- JavaScript -->
+    <script src="js/products-data.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
