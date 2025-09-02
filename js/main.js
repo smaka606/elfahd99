@@ -567,56 +567,123 @@ class StatisticsCounter {
 // ==========================================================================
 
 class ProductsFilter {
-    constructor() {
+    constructor(products) {
+        this.allProducts = products || [];
         this.filterBtns = document.querySelectorAll('.filter-btn');
-        this.productCards = document.querySelectorAll('.product-card[data-category]');
-        
+        this.productsGrid = document.getElementById('products-grid');
+        this.searchInput = document.getElementById('search-input');
+
+        this.currentCategory = 'all';
+        this.currentSearchTerm = '';
+
         this.init();
     }
-    
+
     init() {
-        if (this.filterBtns.length === 0 || this.productCards.length === 0) return;
-        
+        if (!this.productsGrid) return;
         this.setupEventListeners();
+        this.renderProducts(this.allProducts);
     }
-    
+
     setupEventListeners() {
+        // Category filter buttons
         this.filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                const category = btn.dataset.category;
-                this.filterProducts(category);
+                this.currentCategory = btn.dataset.category;
                 this.updateActiveFilter(btn);
+                this.filterAndRender();
             });
         });
+
+        // Search input
+        if (this.searchInput) {
+            this.searchInput.addEventListener('input', debounce((e) => {
+                this.currentSearchTerm = e.target.value.toLowerCase().trim();
+                this.filterAndRender();
+            }, 300));
+        }
     }
-    
-    filterProducts(category) {
-        this.productCards.forEach(card => {
-            const cardCategory = card.dataset.category;
-            
-            if (category === 'all' || cardCategory === category) {
-                card.style.display = 'block';
-                addClassWithAnimation(card, 'fade-in', Math.random() * 200);
-            } else {
-                card.style.display = 'none';
-            }
+
+    filterAndRender() {
+        let filteredProducts = this.allProducts;
+
+        // Filter by category
+        if (this.currentCategory !== 'all') {
+            filteredProducts = filteredProducts.filter(product => product.category === this.currentCategory);
+        }
+
+        // Filter by search term
+        if (this.currentSearchTerm) {
+            filteredProducts = filteredProducts.filter(product =>
+                product.name.toLowerCase().includes(this.currentSearchTerm)
+            );
+        }
+
+        this.renderProducts(filteredProducts);
+    }
+
+    renderProducts(products) {
+        this.productsGrid.innerHTML = ''; // Clear existing products
+
+        if (products.length === 0) {
+            this.productsGrid.innerHTML = '<p class="no-products-found">لا توجد منتجات تطابق بحثك.</p>';
+            return;
+        }
+
+        const fragment = document.createDocumentFragment();
+        products.forEach(product => {
+            const card = this.createProductCard(product);
+            // The event listener is now attached inside createProductCard
+            fragment.appendChild(card);
         });
-        
-        // Trigger layout recalculation
-        this.reorderGrid();
+        this.productsGrid.appendChild(fragment);
     }
-    
+
+    createProductCard(product) {
+        const card = document.createElement('div');
+        // Add 3D hover effect class
+        card.className = 'product-card card-3d-hover';
+        card.dataset.category = product.category;
+
+        const whatsappMessage = encodeURIComponent(`أهلاً، أريد الاستفسار عن منتج: ${product.name}`);
+        const whatsappLink = `https://wa.me/201143343338?text=${whatsappMessage}`;
+        const placeholderImage = 'images/about/product1.jpg';
+
+        card.innerHTML = `
+            <div class="product-image">
+                <img src="${placeholderImage}" alt="${product.name}" loading="lazy">
+                <div class="product-overlay">
+                    <div class="product-actions">
+                        <button class="product-action preview-btn">
+                            👁️ معاينة
+                        </button>
+                        <a href="${whatsappLink}" class="product-action whatsapp" target="_blank">
+                            📱 اطلب الآن
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">${product.name}</h3>
+                <p class="product-description">منتج طازج وعالي الجودة</p>
+            </div>
+        `;
+
+        // Attach event listener for the preview button
+        const previewBtn = card.querySelector('.preview-btn');
+        if (previewBtn) {
+            previewBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent any parent handlers from firing
+                quickView(product); // Pass the whole product object
+            });
+        }
+
+        return card;
+    }
+
     updateActiveFilter(activeBtn) {
         this.filterBtns.forEach(btn => btn.classList.remove('active'));
         activeBtn.classList.add('active');
-    }
-    
-    reorderGrid() {
-        // Smooth grid reordering animation
-        const grid = document.getElementById('products-grid');
-        if (grid) {
-            grid.style.transition = 'all 0.3s ease';
-        }
     }
 }
 
@@ -713,24 +780,35 @@ class ModalManager {
 }
 
 // Global functions for modal management
-function quickView(title, price, description) {
+function quickView(product) {
     const modal = document.getElementById('quickViewModal');
-    if (!modal) return;
-    
-    // Update modal content
+    if (!modal || !product) return;
+
+    // Get modal elements
     const modalTitle = modal.querySelector('#modalTitle');
-    const modalPrice = modal.querySelector('#modalPrice');
+    const modalImage = modal.querySelector('#modalImage');
     const modalDescription = modal.querySelector('#modalDescription');
+    const modalPrice = modal.querySelector('#modalPrice');
     const modalWhatsappBtn = modal.querySelector('#modalWhatsappBtn');
-    
-    if (modalTitle) modalTitle.textContent = title;
-    if (modalPrice) modalPrice.textContent = `${price} جنيه/كيلو`;
-    if (modalDescription) modalDescription.textContent = description;
-    if (modalWhatsappBtn) {
-        const message = `أهلاً، أريد أستفسر عن ${title}`;
-        modalWhatsappBtn.href = generateWhatsAppURL(message);
+
+    // Populate modal content
+    if (modalTitle) modalTitle.textContent = product.name;
+    if (modalImage) {
+        modalImage.src = 'images/about/product1.jpg'; // Using placeholder
+        modalImage.alt = product.name;
     }
-    
+    if (modalDescription) {
+        modalDescription.textContent = "منتج طازج وعالي الجودة، متوفر الآن لدى الفهد للمأكولات البحرية. اطلبه الآن!";
+    }
+    // Clear price field as we don't have price data
+    if (modalPrice) modalPrice.textContent = '';
+
+    // Update WhatsApp button link
+    if (modalWhatsappBtn) {
+        const message = `أهلاً، أريد الاستفسار عن منتج: ${product.name}`;
+        modalWhatsappBtn.href = `https://wa.me/201143343338?text=${encodeURIComponent(message)}`;
+    }
+
     // Open modal
     if (window.modalManager) {
         window.modalManager.openModal('quickViewModal');
@@ -1328,8 +1406,8 @@ class AlFahdApp {
         }
         
         // Products filter (Products page)
-        if (document.querySelector('.filter-btn')) {
-            this.components.productsFilter = new ProductsFilter();
+        if (document.querySelector('.products-filter') && typeof productsData !== 'undefined') {
+            this.components.productsFilter = new ProductsFilter(productsData);
         }
         
         // FAQ accordion (Contact page)
