@@ -3285,6 +3285,19 @@ p {
     font-weight: 600;
 }
 
+.modal-image-container {
+    text-align: center;
+    margin-bottom: var(--spacing-4);
+}
+
+#modalImage {
+    max-width: 100%;
+    height: auto;
+    max-height: 250px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
 .modal-footer {
     padding: var(--spacing-6);
     border-top: 1px solid var(--gray-200);
@@ -3348,12 +3361,31 @@ p {
 }
 
 /* Hover animations for interactive elements */
-.hover-lift {
-    transition: transform var(--transition-base), box-shadow var(--transition-base);
-}
-
 .hover-lift:hover {
     transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Enhanced 3D Card Hover Effect */
+.card-3d-hover {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    will-change: transform, box-shadow;
+}
+
+.card-3d-hover:hover {
+    transform: perspective(1000px) rotateY(2deg) rotateX(1deg) scale(1.04);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Apply a similar 3D effect to other cards site-wide for consistency */
+.feature-card:hover, .testimonial-card:hover, .team-card:hover, .value-card:hover, .contact-card:hover {
+    transform: perspective(1000px) rotateY(2deg) rotateX(1deg) scale(1.04);
+    box-shadow: var(--shadow-xl) !important; /* Use important to override more specific shadows if necessary */
+}
+
+/* Overwrite simple hover lift for a more impressive button animation */
+.btn:hover {
+    transform: translateY(-4px) scale(1.05);
     box-shadow: var(--shadow-lg);
 }
 

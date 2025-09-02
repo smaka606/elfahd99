@@ -633,6 +633,7 @@ class ProductsFilter {
         const fragment = document.createDocumentFragment();
         products.forEach(product => {
             const card = this.createProductCard(product);
+            // The event listener is now attached inside createProductCard
             fragment.appendChild(card);
         });
         this.productsGrid.appendChild(fragment);
@@ -640,21 +641,43 @@ class ProductsFilter {
 
     createProductCard(product) {
         const card = document.createElement('div');
-        card.className = 'product-card';
+        // Add 3D hover effect class
+        card.className = 'product-card card-3d-hover';
         card.dataset.category = product.category;
 
         const whatsappMessage = encodeURIComponent(`أهلاً، أريد الاستفسار عن منتج: ${product.name}`);
         const whatsappLink = `https://wa.me/201143343338?text=${whatsappMessage}`;
+        const placeholderImage = 'images/about/product1.jpg';
 
         card.innerHTML = `
+            <div class="product-image">
+                <img src="${placeholderImage}" alt="${product.name}" loading="lazy">
+                <div class="product-overlay">
+                    <div class="product-actions">
+                        <button class="product-action preview-btn">
+                            👁️ معاينة
+                        </button>
+                        <a href="${whatsappLink}" class="product-action whatsapp" target="_blank">
+                            📱 اطلب الآن
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="product-info">
                 <h3 class="product-title">${product.name}</h3>
                 <p class="product-description">منتج طازج وعالي الجودة</p>
-                <a href="${whatsappLink}" class="btn btn-primary btn-sm product-order-btn" target="_blank">
-                    <i class="whatsapp-icon">📱</i> اطلب الآن
-                </a>
             </div>
         `;
+
+        // Attach event listener for the preview button
+        const previewBtn = card.querySelector('.preview-btn');
+        if (previewBtn) {
+            previewBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent any parent handlers from firing
+                quickView(product); // Pass the whole product object
+            });
+        }
+
         return card;
     }
 
@@ -757,24 +780,35 @@ class ModalManager {
 }
 
 // Global functions for modal management
-function quickView(title, price, description) {
+function quickView(product) {
     const modal = document.getElementById('quickViewModal');
-    if (!modal) return;
-    
-    // Update modal content
+    if (!modal || !product) return;
+
+    // Get modal elements
     const modalTitle = modal.querySelector('#modalTitle');
-    const modalPrice = modal.querySelector('#modalPrice');
+    const modalImage = modal.querySelector('#modalImage');
     const modalDescription = modal.querySelector('#modalDescription');
+    const modalPrice = modal.querySelector('#modalPrice');
     const modalWhatsappBtn = modal.querySelector('#modalWhatsappBtn');
-    
-    if (modalTitle) modalTitle.textContent = title;
-    if (modalPrice) modalPrice.textContent = `${price} جنيه/كيلو`;
-    if (modalDescription) modalDescription.textContent = description;
-    if (modalWhatsappBtn) {
-        const message = `أهلاً، أريد أستفسر عن ${title}`;
-        modalWhatsappBtn.href = generateWhatsAppURL(message);
+
+    // Populate modal content
+    if (modalTitle) modalTitle.textContent = product.name;
+    if (modalImage) {
+        modalImage.src = 'images/about/product1.jpg'; // Using placeholder
+        modalImage.alt = product.name;
     }
-    
+    if (modalDescription) {
+        modalDescription.textContent = "منتج طازج وعالي الجودة، متوفر الآن لدى الفهد للمأكولات البحرية. اطلبه الآن!";
+    }
+    // Clear price field as we don't have price data
+    if (modalPrice) modalPrice.textContent = '';
+
+    // Update WhatsApp button link
+    if (modalWhatsappBtn) {
+        const message = `أهلاً، أريد الاستفسار عن منتج: ${product.name}`;
+        modalWhatsappBtn.href = `https://wa.me/201143343338?text=${encodeURIComponent(message)}`;
+    }
+
     // Open modal
     if (window.modalManager) {
         window.modalManager.openModal('quickViewModal');
