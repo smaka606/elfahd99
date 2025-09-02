@@ -190,21 +190,28 @@ class PreloaderManager {
     }
     
     initScrollAnimations() {
-        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        const animatedElements = document.querySelectorAll('[data-animation]');
         
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
+                    const animationType = entry.target.dataset.animation;
+                    entry.target.classList.add(animationType, 'animated');
+
+                    // Special handling for image reveals
+                    if (entry.target.classList.contains('image-reveal')) {
+                        entry.target.classList.add('revealed');
+                    }
+
                     observer.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.1,
-            rootMargin: '50px'
+            threshold: 0.15, // A bit more of the element should be visible
+            rootMargin: '0px 0px -50px 0px' // Start animation a bit later
         });
-        
-        animateElements.forEach(element => {
+
+        animatedElements.forEach(element => {
             observer.observe(element);
         });
     }
@@ -569,9 +576,12 @@ class StatisticsCounter {
 class ProductsFilter {
     constructor(products) {
         this.allProducts = products || [];
+        this.fuse = null;
+
         this.filterBtns = document.querySelectorAll('.filter-btn');
         this.productsGrid = document.getElementById('products-grid');
         this.searchInput = document.getElementById('search-input');
+        this.suggestionsContainer = document.getElementById('suggestions-container');
 
         this.currentCategory = 'all';
         this.currentSearchTerm = '';
@@ -580,7 +590,15 @@ class ProductsFilter {
     }
 
     init() {
-        if (!this.productsGrid) return;
+        if (!this.productsGrid || typeof Fuse === 'undefined') return;
+
+        const options = {
+            keys: ['name'],
+            includeScore: true,
+            threshold: 0.4,
+        };
+        this.fuse = new Fuse(this.allProducts, options);
+
         this.setupEventListeners();
         this.renderProducts(this.allProducts);
     }
@@ -597,11 +615,59 @@ class ProductsFilter {
 
         // Search input
         if (this.searchInput) {
-            this.searchInput.addEventListener('input', debounce((e) => {
-                this.currentSearchTerm = e.target.value.toLowerCase().trim();
-                this.filterAndRender();
-            }, 300));
+            this.searchInput.addEventListener('input', (e) => {
+                this.currentSearchTerm = e.target.value.trim();
+                this.handleSearchInput();
+            });
+
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!this.searchInput.contains(e.target)) {
+                    this.hideSuggestions();
+                }
+            });
         }
+    }
+
+    handleSearchInput() {
+        if (this.currentSearchTerm.length < 1) {
+            this.hideSuggestions();
+            this.filterAndRender();
+            return;
+        }
+
+        const searchResults = this.fuse.search(this.currentSearchTerm).slice(0, 5);
+        this.displaySuggestions(searchResults.map(result => result.item));
+        this.filterAndRender();
+    }
+
+    displaySuggestions(suggestions) {
+        if (!this.suggestionsContainer) return;
+
+        if (suggestions.length === 0) {
+            this.hideSuggestions();
+            return;
+        }
+
+        this.suggestionsContainer.innerHTML = '';
+        suggestions.forEach(suggestion => {
+            const item = document.createElement('div');
+            item.className = 'suggestion-item';
+            item.textContent = suggestion.name;
+            item.addEventListener('click', () => {
+                this.searchInput.value = suggestion.name;
+                this.currentSearchTerm = suggestion.name;
+                this.hideSuggestions();
+                this.filterAndRender();
+            });
+            this.suggestionsContainer.appendChild(item);
+        });
+        this.suggestionsContainer.classList.add('active');
+    }
+
+    hideSuggestions() {
+        if (!this.suggestionsContainer) return;
+        this.suggestionsContainer.classList.remove('active');
     }
 
     filterAndRender() {
@@ -612,11 +678,10 @@ class ProductsFilter {
             filteredProducts = filteredProducts.filter(product => product.category === this.currentCategory);
         }
 
-        // Filter by search term
+        // Filter by search term using Fuse.js if term is present
         if (this.currentSearchTerm) {
-            filteredProducts = filteredProducts.filter(product =>
-                product.name.toLowerCase().includes(this.currentSearchTerm)
-            );
+            const fuse = new Fuse(filteredProducts, { keys: ['name'], threshold: 0.4 });
+            filteredProducts = fuse.search(this.currentSearchTerm).map(result => result.item);
         }
 
         this.renderProducts(filteredProducts);
@@ -666,6 +731,9 @@ class ProductsFilter {
             <div class="product-info">
                 <h3 class="product-title">${product.name}</h3>
                 <p class="product-description">منتج طازج وعالي الجودة</p>
+                <div class="product-price">
+                    <span class="price-range">يبدأ من ${product.price} جنيه/كيلو</span>
+                </div>
             </div>
         `;
 
@@ -800,8 +868,9 @@ function quickView(product) {
     if (modalDescription) {
         modalDescription.textContent = "منتج طازج وعالي الجودة، متوفر الآن لدى الفهد للمأكولات البحرية. اطلبه الآن!";
     }
-    // Clear price field as we don't have price data
-    if (modalPrice) modalPrice.textContent = '';
+    if (modalPrice) {
+        modalPrice.textContent = `يبدأ من ${product.price} جنيه/كيلو`;
+    }
 
     // Update WhatsApp button link
     if (modalWhatsappBtn) {
@@ -1346,6 +1415,106 @@ class AccessibilityManager {
 }
 
 // ==========================================================================
+// SCROLL PROGRESS BAR
+// ==========================================================================
+
+class ScrollProgressBar {
+    constructor() {
+        this.progressBar = document.getElementById('scroll-progress-bar');
+        this.init();
+    }
+
+    init() {
+        if (!this.progressBar) return;
+        window.addEventListener('scroll', throttle(() => this.updateScroll(), 16));
+    }
+
+    updateScroll() {
+        const scrollTotal = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercent = (window.scrollY / scrollTotal) * 100;
+        this.progressBar.style.width = `${scrollPercent}%`;
+    }
+}
+
+// ==========================================================================
+// FLOATING ACTION BUTTON (FAB)
+// ==========================================================================
+
+class FABManager {
+    constructor() {
+        this.fabContainer = document.querySelector('.fab-container');
+        this.fabMainBtn = document.getElementById('fab-main-btn');
+        this.init();
+    }
+
+    init() {
+        if (!this.fabContainer || !this.fabMainBtn) return;
+        this.fabMainBtn.addEventListener('click', () => this.toggleMenu());
+    }
+
+    toggleMenu() {
+        this.fabContainer.classList.toggle('active');
+    }
+}
+
+
+// ==========================================================================
+// THEME MANAGER (Dark/Light Mode)
+// ==========================================================================
+
+class ThemeManager {
+    constructor() {
+        this.toggleButton = document.getElementById('theme-toggle');
+        this.init();
+    }
+
+    init() {
+        if (!this.toggleButton) return;
+
+        this.setupEventListeners();
+        this.applyInitialTheme();
+    }
+
+    setupEventListeners() {
+        this.toggleButton.addEventListener('click', () => this.toggleTheme());
+    }
+
+    applyInitialTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            this.setTheme(savedTheme);
+            return;
+        }
+
+        const hour = new Date().getHours();
+        if (hour < 6 || hour >= 19) { // Auto dark mode from 7 PM to 6 AM
+            this.setTheme('dark');
+            return;
+        }
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            this.setTheme('dark');
+            return;
+        }
+
+        this.setTheme('light');
+    }
+
+    toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        this.setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+    }
+
+    setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        // You might need to add classes to the toggle button here if you style the sun/moon icons
+    }
+}
+
+
+// ==========================================================================
 // MAIN APPLICATION INITIALIZATION
 // ==========================================================================
 
@@ -1367,6 +1536,9 @@ class AlFahdApp {
     initializeComponents() {
         try {
             // Initialize core components
+            this.components.themeManager = new ThemeManager();
+            this.components.scrollProgress = new ScrollProgressBar();
+            this.components.fab = new FABManager();
             this.components.preloader = new PreloaderManager();
             this.components.navigation = new NavigationManager();
             this.components.modal = new ModalManager();
